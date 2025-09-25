@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Queens, Bad Advice</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Two Queens, Bad Advice</h1>
+            <p>Get life advice from Trixie and Katya - what could go wrong?</p>
+        </header>
+
+        <main>
+            <section class="advice-section">
+                <label for="problem-category">What's your problem?</label>
+                <select id="problem-category">
+                    <option value="">Choose your crisis...</option>
+                    <option value="dating">Dating & Relationships</option>
+                    <option value="career">Career & Money</option>
+                    <option value="family">Family Drama</option>
+                    <option value="friends">Friend Problems</option>
+                    <option value="life">General Life Mess</option>
+                </select>
+
+                <button id="get-advice-btn">Get Advice from the Queens</button>
+            </section>
+
+            <section class="results-section" id="results-section">
+                <div class="queen-advice trixie-advice">
+                    <h3>Trixie Says:</h3>
+                    <div class="advice-text" id="trixie-advice"></div>
+                </div>
+
+                <div class="queen-advice katya-advice">
+                    <h3>Katya Says:</h3>
+                    <div class="advice-text" id="katya-advice"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Disclaimer: This advice is for entertainment purposes only. Follow at your own risk.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
