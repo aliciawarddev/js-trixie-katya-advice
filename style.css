@@ -1,7 +1,106 @@
+/* Variables */
+:root {
+    --pink: #eb729f;
+    --pink-light: #f196b9;
+    --red: #d62a40;
+    --red-light: #e05e6c;
+    --cream: #FDF5E6;
+    --charcoal: #2C2C2C;
+    --blush: #F4A6B7;
+    --mint: #B8E6B8;
+    --warm-gray: #8B8B8B;
+    --gold: #FFD700;  
+}
+
+/* GENERAL */
 .app-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(to right, var(--pink) 0%, var(--pink) 47%, var(--red) 53%, var(--red) 100%);
+    height: 100vh;
+    width: 100vw;
+}
+
+/* HEADER */
+header h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+}
+
+header p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ADVICE SECTION */
+
+label, select, option, button, footer {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+}
+
+.advice-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* RESULTS */
+.results-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+    gap: 6rem;
+}
+
+.queen-advice {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 2px solid var(--cream);
+}
+
+.advice-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2rem;
+}
+
+/* TRIXIE ADVICE */
+.queen-advice.trixie-advice h3 {
+    font-family: 'Pacifico';
+    font-size: 2rem;
+}
+
+.queen-advice.trixie-advice {
+    background-color: var(--pink-light);
+}
+
+/* KATYA ADVICE */
+.queen-advice.katya-advice h3 {
+    font-family: 'Special Elite';
+    font-size: 2rem;
+}
+
+.queen-advice.katya-advice {
+    background-color: var(--red-light);
 }
 
