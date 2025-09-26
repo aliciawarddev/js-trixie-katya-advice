@@ -24,15 +24,44 @@
 }
 
 /* HEADER */
+header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    z-index: 2;
+    position: relative;
+    background: rgba(253, 245, 230, 0.15);
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(253, 245, 230, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+}
+
 header h1 {
     font-family: 'Fredoka', sans-serif;
-    font-weight: 600;
-    font-size: 3.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     color: var(--cream);
+    text-shadow: 
+        -2px -2px 0 var(--charcoal),
+        2px -2px 0 var(--charcoal),
+        -2px 2px 0 var(--charcoal),
+        2px 2px 0 var(--charcoal),
+        -2px 0 0 var(--charcoal),
+        2px 0 0 var(--charcoal),
+        0 -2px 0 var(--charcoal),
+        0 2px 0 var(--charcoal),
+        0 0 8px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1.5px;
+    margin-bottom: 0.8rem;
+    transition: all 0.3s ease;
 }
+
+
 
 header p {
     font-family: 'Nunito', sans-serif;
@@ -40,6 +69,11 @@ header p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+header, main {
+    position: relative;
+    z-index: 2;
 }
 
 /* ADVICE SECTION */
@@ -51,37 +85,165 @@ label, select, option, button, footer {
 
 .advice-section {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    background: rgba(253, 245, 230, 0.9);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 3px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--cream);
+}
+
+label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Select Dropdown */
+select {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    border: 2px solid var(--mint);
+    border-radius: 12px;
+    background: white;
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 280px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    will-change: transform;
+}
+
+select:hover, select:focus {
+    border-color: var(--pink);
+    transform: translate3d(0, -1px, 0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    outline: none;
+}
+
+select option {
+    padding: 0.5rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+}
+
+/* Button */
+button {
+    background: linear-gradient(45deg, var(--mint), #A8D8A8, var(--mint));
+    color: var(--charcoal);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translate3d(0, -2px, 0) scale(1.02);
+}
+
+button:active {
+    transform: translate3d(0, -1px, 0) scale(1.01);
+}
+
+/* Subtle shine effect on hover */
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+button:hover::before {
+    left: 100%;
 }
 
 /* RESULTS */
 .results-section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 2rem;
-    gap: 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    opacity: 1; /* Changed from 0 to 1 */
+    transform: translateY(0); /* Changed from 20px to 0 */
+    transition: all 0.5s ease-out;
+    pointer-events: all; /* Changed from none to all */
 }
 
+.results-section.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Queen advice */
 .queen-advice {
-    width: 15rem;
-    height: 15rem;
-    border-radius: 10px;
+    min-height: 280px;
+    border-radius: 18px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    border: 2px solid var(--cream);
+    padding: 1.8rem;
+    border: 3px solid var(--cream);
+    position: relative;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    will-change: transform;
+}
+
+.queen-advice:hover {
+    transform: translate3d(0, -3px, 0);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.queen-advice h3 {
+    margin-bottom: 1.2rem;
+    text-align: center;
+    color: var(--cream);
+    text-shadow: 1px 1px 3px var(--charcoal);
+    font-size: 2rem;
 }
 
 .advice-text {
     font-family: 'Nunito', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--charcoal);
+    background: rgba(253, 245, 230, 0.95);
+    padding: 1.2rem;
+    border-radius: 12px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* TRIXIE ADVICE */
@@ -91,7 +253,7 @@ label, select, option, button, footer {
 }
 
 .queen-advice.trixie-advice {
-    background-color: var(--pink-light);
+    background: linear-gradient(135deg, var(--pink), var(--pink-light));
 }
 
 /* KATYA ADVICE */
@@ -101,6 +263,37 @@ label, select, option, button, footer {
 }
 
 .queen-advice.katya-advice {
-    background-color: var(--red-light);
+    background: linear-gradient(135deg, var(--red), var(--red-light));
+    transform: rotate(-2deg);
 }
 
+.queen-advice.katya-advice:hover {
+    transform: translate3d(0, -3px, 0) rotate(-1deg);
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+    header {
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    header h1 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        letter-spacing: 1px;
+    }
+    
+    header p {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        padding: 0.4rem 0.8rem;
+    }
+    
+    footer {
+        padding: 1.2rem 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    footer p {
+        font-size: 0.8rem;
+    }
+}
