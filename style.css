@@ -10,6 +10,9 @@
     --mint: #B8E6B8;
     --warm-gray: #8B8B8B;
     --gold: #FFD700;  
+    --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.2);
+    --shadow-large: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* GENERAL */
@@ -21,6 +24,9 @@
     background: linear-gradient(to right, var(--pink) 0%, var(--pink) 47%, var(--red) 53%, var(--red) 100%);
     height: 100vh;
     width: 100vw;
+    padding: 2rem 1rem; /* Add container padding */
+    min-height: 100vh; /* Prevent overflow issues */
+    gap: 2rem; /* Add consistent spacing */
 }
 
 /* HEADER */
@@ -29,6 +35,7 @@ header {
     margin-bottom: 2.5rem;
     z-index: 2;
     position: relative;
+    margin-bottom: 3rem;
 }
 
 header h1 {
@@ -44,13 +51,13 @@ header h1 {
 
 header p {
     font-family: 'Nunito', sans-serif;
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* Smaller, more readable */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
-    color: var(--mint);
-    text-shadow: 2px 2px 4px var(--charcoal); /* Enhanced shadow */
+    font-weight: 500; /* Reduced from 600 */
+    color: var(--cream);
+    text-shadow: 2px 2px 4px var(--charcoal);
     text-align: center;
 }
 
@@ -71,17 +78,28 @@ label, select, option, button, footer {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+}
+
+.advice-section::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background: var(--cream);
+    border-radius: 2px;
+    margin: 2rem auto 0;
+    opacity: 0.6;
 }
 
 /* CHANGED - Enhanced label styling without card background */
 label {
     font-family: 'Fredoka', sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.3rem, 3vw, 1.6rem); /* More responsive */
     font-weight: 600;
     color: var(--cream); /* Changed from var(--charcoal) */
     text-align: center;
     text-shadow: 2px 2px 4px var(--charcoal); /* Enhanced shadow */
+    margin-bottom: 0.5rem; /* Add spacing */
 }
 
 /* Select Dropdown */
@@ -97,14 +115,14 @@ select {
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 280px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-small);
     will-change: transform;
 }
 
 select:hover, select:focus {
     border-color: var(--pink);
     transform: translate3d(0, -1px, 0);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-medium);
     outline: none;
 }
 
@@ -128,9 +146,7 @@ button {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-medium);
     position: relative;
     overflow: hidden;
 }
@@ -188,13 +204,13 @@ button:hover::before {
     position: relative;
     transition: all 0.3s ease;
     backdrop-filter: blur(3px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-medium);
     will-change: transform;
 }
 
 .queen-advice:hover {
     transform: translate3d(0, -3px, 0);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow-large);
 }
 
 .queen-advice h3 {
@@ -207,8 +223,8 @@ button:hover::before {
 
 .advice-text {
     font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: clamp(0.95rem, 2vw, 1.1rem); /* Better scaling */
+    line-height: 1.6;
     color: var(--charcoal);
     background: rgba(253, 245, 230, 0.95);
     padding: 1.2rem;
@@ -218,8 +234,15 @@ button:hover::before {
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-weight: 500;
+    font-weight: 400;
     box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.advice-text:empty::before {
+    content: 'Select a problem category and click the button to get advice!';
+    color: var(--warm-gray);
+    font-style: italic;
+    opacity: 0.8;
 }
 
 /* TRIXIE ADVICE */
@@ -249,6 +272,33 @@ button:hover::before {
 
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
+    .app-container {
+        padding: 1rem 0.5rem;
+        gap: 1.5rem;
+    }
+
+    .results-section {
+        grid-template-columns: 1fr; /* Stack on mobile */
+        gap: 1.5rem;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .queen-advice {
+        min-height: 200px; /* Shorter on mobile */
+        padding: 1.5rem;
+    }
+
+    select {
+        min-width: 250px; /* Smaller on mobile */
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
     header {
         padding: 1.5rem 2rem;
         margin-bottom: 2rem;
@@ -262,14 +312,5 @@ button:hover::before {
     header p {
         font-size: clamp(0.9rem, 3vw, 1.1rem);
         padding: 0.4rem 0.8rem;
-    }
-    
-    footer {
-        padding: 1.2rem 1.5rem;
-        margin-top: 2rem;
-    }
-    
-    footer p {
-        font-size: 0.8rem;
     }
 }
