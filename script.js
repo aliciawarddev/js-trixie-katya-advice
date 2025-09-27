@@ -33,9 +33,11 @@ function generateAdvice() {
     const category = document.getElementById('problem-category').value; // Get selected category from dropdown
 
     if (!category) { // Check if user selected a category
-        alert('Choose a category first!'); // Show error message
+        showError('Choose a category first, honey! 💅'); // Show custom error message
         return; // Exit function early
     }
+
+    hideError(); // Hide error when successful
 
     const trixieAdvice = getRandomAdvice(category, 'trixie'); // Get random Trixie advice
     const katyaAdvice = getRandomAdvice(category, 'katya'); // Get random Katya advice
@@ -48,3 +50,23 @@ function generateAdvice() {
 
 // Add click event to button to run generateAdvice function
 document.getElementById('get-advice-btn').addEventListener('click', generateAdvice);
+
+// Function to show custom error message
+function showError(message) {
+    let errorEl = document.getElementById('error-message'); // Look for existing error element
+    if (!errorEl) { // If it doesn't exist, create it
+        errorEl = document.createElement('div'); // Create new div
+        errorEl.id = 'error-message'; // Give it an ID
+        document.querySelector('.advice-section').appendChild(errorEl); // Add it to advice section
+    }
+    errorEl.textContent = message; // Set the error message text
+    errorEl.classList.add('show'); // Make it visible
+}
+
+// Function to hide error message
+function hideError() {
+    const errorEl = document.getElementById('error-message'); // Find error element
+    if (errorEl) { // If it exists
+        errorEl.classList.remove('show'); // Hide it
+    }
+}

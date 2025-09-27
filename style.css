@@ -271,6 +271,36 @@ button:hover::before {
     transform: translate3d(0, -3px, 0) rotate(-1deg);
 }
 
+/* ERROR MESSAGE */
+#error-message {
+    background: linear-gradient(45deg, var(--red), var(--red-light));
+    color: var(--cream);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    text-align: center;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    box-shadow: var(--shadow-medium);
+    border: 2px solid var(--cream);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+#error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Shake animation for error */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
     .app-container {
