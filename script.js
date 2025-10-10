@@ -16,9 +16,9 @@ const advice = {
         trixie: ["Friends advice 1", "Friends advice 2"],
         katya: ["Friends advice 1", "Friends advice 2"]
     }, 
-    life: {
-        trixie: ["Life advice 1", "Life advice 2"],
-        katya: ["Life advice 1", "Life advice 2"]
+    beauty: {
+        trixie: ["If your friend has a fan, you put that prop on your head, just to like one up them", "Beauty advice 2"],
+        katya: ["But also, remove all the functionality so you don't get any of the benefits of having a fan", "Beauty advice 2"]
     }
 };
 
