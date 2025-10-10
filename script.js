@@ -57,7 +57,7 @@ function showError(message) {
     if (!errorEl) { // If it doesn't exist, create it
         errorEl = document.createElement('div'); // Create new div
         errorEl.id = 'error-message'; // Give it an ID
-        document.querySelector('.advice-section').appendChild(errorEl); // Add it to advice section
+        document.querySelector('main').appendChild(errorEl); // Add it to advice section
     }
     errorEl.textContent = message; // Set the error message text
     errorEl.classList.add('show'); // Make it visible
