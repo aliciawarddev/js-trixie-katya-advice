@@ -1,0 +1,666 @@
+/* ===================================
+   VARIABLES
+   =================================== */
+:root {
+    /* Bold drag-appropriate colors */
+    --pink-card: #FF10F0;
+    --pink-card-light: #FF69B4;
+    --pink-accent: #FF1493;
+    --pink-neon: #FF10F0;
+    
+    --red-card: #E60026;
+    --red-card-light: #FF4757;
+    --red-accent: #FF003C;
+    --red-neon: #FF003C;
+    
+    --cream: #FFF8E7;
+    --white: #FFFFFF;
+    --charcoal: #1a1a1a;
+    --gold: #FFD700;
+    --gold-metallic: #FFDF00;
+    --silver: #C0C0C0;
+    --warm-gray: #8B8B8B;
+    
+    /* Neon glow colors */
+    --pink-glow: rgba(255, 16, 240, 0.8);
+    --red-glow: rgba(255, 0, 60, 0.8);
+    --gold-glow: rgba(255, 215, 0, 0.6);
+    
+    /* Photo booth colors */
+    --booth-frame: #E8E8E8;
+    --booth-inner: #F5F5F5;
+    --booth-accent: #CCCCCC;
+    
+    /* Spacing & sizing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    --font-size-xs: 0.875rem;
+    --font-size-sm: 1rem;
+    --font-size-base: 1.125rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 3rem;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    
+    /* Shadows */
+    --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-large: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --shadow-dramatic: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ===================================
+   RESET & BASE
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: 
+        /* Dressing room wallpaper pattern */
+        repeating-linear-gradient(
+            45deg,
+            #FFE5EC 0px,
+            #FFE5EC 20px,
+            #FFD4E0 20px,
+            #FFD4E0 40px
+        ),
+        linear-gradient(to bottom, #FFCCE0, #FFE5F0);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
+}
+
+/* ===================================
+   PHOTO BOOTH FRAME
+   =================================== */
+.photobooth-frame {
+    background: var(--booth-frame);
+    padding: 2.5rem;
+    border-radius: 30px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 15px var(--booth-inner),
+        inset 0 0 0 16px var(--booth-accent);
+    max-width: 1000px;
+    width: 100%;
+    position: relative;
+}
+
+/* Rhinestone decoration on booth frame */
+.photobooth-frame::before {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border-radius: 25px;
+    background: 
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.9) 5px, transparent 5px),
+        radial-gradient(circle at 90% 10%, rgba(255,215,0,0.8) 5px, transparent 5px),
+        radial-gradient(circle at 10% 90%, rgba(192,192,192,0.8) 5px, transparent 5px),
+        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.9) 5px, transparent 5px),
+        radial-gradient(circle at 50% 10%, rgba(255,215,0,0.8) 4px, transparent 4px),
+        radial-gradient(circle at 50% 90%, rgba(255,255,255,0.9) 4px, transparent 4px),
+        radial-gradient(circle at 10% 50%, rgba(192,192,192,0.8) 4px, transparent 4px),
+        radial-gradient(circle at 90% 50%, rgba(255,215,0,0.8) 4px, transparent 4px);
+    animation: rhinestoneSparkle 2s infinite alternate;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes rhinestoneSparkle {
+    0%, 100% { 
+        opacity: 0.6;
+        filter: brightness(1);
+    }
+    50% { 
+        opacity: 1;
+        filter: brightness(1.5) drop-shadow(0 0 6px rgba(255,255,255,0.8));
+    }
+}
+
+/* ===================================
+   APP CONTAINER
+   =================================== */
+.app-container {
+    background: linear-gradient(to bottom, #2C2C2C, #1a1a1a);
+    border-radius: 15px;
+    padding: var(--spacing-xl) var(--spacing-md);
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===================================
+   HEADER WITH NEON TITLE
+   =================================== */
+header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    width: 100%;
+}
+
+.neon-title {
+    font-family: 'Righteous', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    line-height: 1.2;
+}
+
+.pink-neon {
+    color: var(--pink-neon);
+    text-shadow: 
+        0 0 7px var(--pink-glow),
+        0 0 10px var(--pink-glow),
+        0 0 21px var(--pink-glow),
+        0 0 42px var(--pink-glow),
+        0 0 82px var(--pink-glow);
+    animation: neonFlickerPink 4s infinite alternate;
+}
+
+.red-neon {
+    color: var(--red-neon);
+    text-shadow: 
+        0 0 7px var(--red-glow),
+        0 0 10px var(--red-glow),
+        0 0 21px var(--red-glow),
+        0 0 42px var(--red-glow),
+        0 0 82px var(--red-glow);
+    animation: neonFlickerRed 3s infinite alternate;
+}
+
+@keyframes neonFlickerPink {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+            0 0 7px var(--pink-glow),
+            0 0 10px var(--pink-glow),
+            0 0 21px var(--pink-glow),
+            0 0 42px var(--pink-glow),
+            0 0 82px var(--pink-glow),
+            0 0 92px var(--pink-glow);
+    }
+    20%, 24%, 55% {        
+        text-shadow: 
+            0 0 4px var(--pink-glow),
+            0 0 8px var(--pink-glow);
+    }
+}
+
+@keyframes neonFlickerRed {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 
+            0 0 7px var(--red-glow),
+            0 0 10px var(--red-glow),
+            0 0 21px var(--red-glow),
+            0 0 42px var(--red-glow),
+            0 0 82px var(--red-glow),
+            0 0 92px var(--red-glow);
+    }
+    20%, 24%, 55% {        
+        text-shadow: 
+            0 0 4px var(--red-glow),
+            0 0 8px var(--red-glow);
+    }
+}
+
+header p {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 500;
+    color: var(--cream);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ===================================
+   MAIN CONTENT
+   =================================== */
+main {
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===================================
+   ADVICE SECTION (INPUT AREA)
+   =================================== */
+.advice-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    background: rgba(250, 245, 240, 0.95);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(10px);
+    border: 3px solid var(--gold);
+    box-shadow: var(--shadow-medium);
+}
+
+label {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    font-weight: 700;
+    color: var(--charcoal);
+    text-align: center;
+}
+
+select {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-md);
+    background: var(--cream);
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 280px;
+    box-shadow: var(--shadow-small);
+}
+
+select:hover, select:focus {
+    border-color: var(--pink-card);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+    outline: none;
+}
+
+/* ===================================
+   BUTTON - Dressing Room Bulb Style
+   =================================== */
+button {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Righteous', cursive;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 1rem 2.5rem;
+    border: 5px solid var(--gold);
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 
+        0 4px 15px rgba(255, 215, 0, 0.4),
+        inset 0 2px 10px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+/* Light bulbs around button */
+button::before {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    border-radius: 50px;
+    background-image: 
+        radial-gradient(circle at calc(0% + 10px) 50%, var(--gold) 7px, transparent 7px),
+        radial-gradient(circle at calc(20% + 10px) 50%, var(--gold) 7px, transparent 7px),
+        radial-gradient(circle at calc(40% + 10px) 50%, var(--gold) 7px, transparent 7px),
+        radial-gradient(circle at calc(60% + 10px) 50%, var(--gold) 7px, transparent 7px),
+        radial-gradient(circle at calc(80% + 10px) 50%, var(--gold) 7px, transparent 7px),
+        radial-gradient(circle at calc(100% - 10px) 50%, var(--gold) 7px, transparent 7px);
+    background-repeat: no-repeat;
+    animation: bulbGlow 1.5s infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes bulbGlow {
+    0%, 100% { 
+        filter: brightness(1) drop-shadow(0 0 8px var(--gold-glow));
+    }
+    50% { 
+        filter: brightness(1.6) drop-shadow(0 0 15px var(--gold-glow));
+    }
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 6px 25px rgba(255, 215, 0, 0.6),
+        inset 0 2px 15px rgba(255, 255, 255, 0.7);
+}
+
+button:active {
+    transform: scale(1.02);
+}
+
+.button-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================================
+   RESULTS SECTION - Photo Strip
+   =================================== */
+.photo-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 auto;
+    max-width: 400px;
+    background: var(--white);
+    padding: 20px;
+    padding-bottom: 60px;
+    border-radius: 4px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Photo strip perforation holes at top */
+.photo-strip::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 8px;
+    background: 
+        radial-gradient(circle at 10% 50%, transparent 3px, var(--white) 3px),
+        radial-gradient(circle at 30% 50%, transparent 3px, var(--white) 3px),
+        radial-gradient(circle at 50% 50%, transparent 3px, var(--white) 3px),
+        radial-gradient(circle at 70% 50%, transparent 3px, var(--white) 3px),
+        radial-gradient(circle at 90% 50%, transparent 3px, var(--white) 3px);
+    background-size: 100% 100%;
+}
+
+/* Photo strip caption at bottom */
+.photo-strip::after {
+    content: 'Two Queens Bad Advice';
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Satisfy', cursive;
+    font-size: 1.1rem;
+    color: var(--charcoal);
+    opacity: 0.6;
+}
+
+/* ===================================
+   PHOTO CARDS (Polaroid Style)
+   =================================== */
+.photo-card {
+    perspective: 1000px;
+}
+
+.photo-polaroid {
+    background: var(--white);
+    padding: 0;
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: rotate(0deg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trixie-photo .photo-polaroid,
+.katya-photo .photo-polaroid {
+    transform: rotate(0deg);
+}
+
+/* ===================================
+   QUEEN ADVICE CARDS (Photo Content)
+   =================================== */
+.queen-advice {
+    min-height: 250px;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Remove individual photo captions */
+.photo-caption {
+    display: none;
+}
+
+.queen-advice h3 {
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    color: var(--cream);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+}
+
+.advice-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    line-height: 1.6;
+    color: var(--charcoal);
+    background: rgba(255, 255, 255, 0.95);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.advice-text:empty::before {
+    content: 'Select a problem and snap your advice!';
+    color: var(--warm-gray);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* ===================================
+   TRIXIE STYLING
+   =================================== */
+.queen-advice.trixie-advice {
+    background: linear-gradient(135deg, 
+        var(--pink-card) 0%, 
+        var(--pink-card-light) 100%
+    );
+}
+
+.queen-advice.trixie-advice h3 {
+    font-family: 'Satisfy', cursive;
+    font-size: 2rem;
+}
+
+.trixie-advice h3::after {
+    content: '💄';
+    margin-left: var(--spacing-xs);
+    font-size: 0.7em;
+}
+
+/* ===================================
+   KATYA STYLING
+   =================================== */
+.queen-advice.katya-advice {
+    background: linear-gradient(135deg, 
+        var(--red-card) 0%, 
+        var(--red-card-light) 100%
+    );
+}
+
+.queen-advice.katya-advice h3 {
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 1.6rem;
+}
+
+.katya-advice h3::after {
+    content: '🔥';
+    margin-left: var(--spacing-xs);
+    font-size: 0.7em;
+}
+
+/* ===================================
+   PHOTO CAPTIONS
+   =================================== */
+.photo-caption {
+    font-family: 'Satisfy', cursive;
+    font-size: 1rem;
+    color: var(--charcoal);
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0.7;
+}
+
+/* ===================================
+   ERROR MESSAGE
+   =================================== */
+#error-message {
+    background: linear-gradient(135deg, 
+        var(--red-card) 0%, 
+        var(--red-card-light) 100%
+    );
+    color: var(--cream);
+    border: 3px solid var(--cream);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: var(--font-size-base);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-large);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    margin-top: var(--spacing-md);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+#error-message::before {
+    content: '⚠️ ';
+    font-size: 1.3em;
+}
+
+#error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: errorPulse 2s ease-in-out;
+}
+
+@keyframes errorPulse {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+    }
+    50% { 
+        transform: translateY(0) scale(1.03); 
+    }
+}
+
+/* ===================================
+   MOBILE RESPONSIVENESS
+   =================================== */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+
+    .photobooth-frame {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    .app-container {
+        padding: var(--spacing-md) var(--spacing-sm);
+        min-height: auto;
+    }
+
+    .neon-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+
+    .photo-strip {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .photo-polaroid {
+        padding: 12px;
+        padding-bottom: 40px;
+    }
+
+    .trixie-photo .photo-polaroid,
+    .katya-photo .photo-polaroid {
+        transform: rotate(0deg);
+    }
+
+    .queen-advice {
+        min-height: 220px;
+        padding: var(--spacing-sm);
+    }
+
+    .queen-advice h3 {
+        font-size: 1.5rem;
+    }
+
+    .advice-section {
+        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+
+    select {
+        min-width: 240px;
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 0.9rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    button::before {
+        inset: -12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .photobooth-frame {
+        padding: 1rem;
+    }
+
+    .neon-title {
+        gap: 0.3rem;
+    }
+
+    select {
+        min-width: 100%;
+    }
+
+    button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}

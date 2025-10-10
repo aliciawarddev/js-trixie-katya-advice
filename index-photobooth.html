@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Queens, Bad Advice</title>
+    <link rel="stylesheet" href="style-photobooth.css">
+    
+    <!-- Google Font Links -->
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="photobooth-frame">
+        <div class="app-container">
+            <header>
+                <h1 class="neon-title">
+                    <span class="pink-neon">Two Queens</span>
+                    <span class="red-neon">Bad Advice</span>
+                </h1>
+                <p>Get life advice from Trixie and Katya - what could go wrong?</p>
+            </header>
+
+            <main>
+                <section class="advice-section">
+                    <label for="problem-category">What's your problem?</label>
+                    <select id="problem-category">
+                        <option value="">Choose your crisis...</option>
+                        <option value="dating">Dating & Relationships</option>
+                        <option value="career">Career & Money</option>
+                        <option value="family">Family Drama</option>
+                        <option value="friends">Friend Problems</option>
+                        <option value="life">General Life Mess</option>
+                    </select>
+
+                    <button id="get-advice-btn">
+                        <span class="button-text">SNAP YOUR ADVICE</span>
+                    </button>
+                </section>
+
+                <section class="results-section" id="results-section">
+                    <div class="photo-strip">
+                        <div class="photo-card trixie-photo">
+                            <div class="photo-polaroid">
+                                <div class="queen-advice trixie-advice">
+                                    <h3>Trixie Says:</h3>
+                                    <div class="advice-text" id="trixie-advice"></div>
+                                </div>
+                                <div class="photo-caption">Photo 1 of 2</div>
+                            </div>
+                        </div>
+
+                        <div class="photo-card katya-photo">
+                            <div class="photo-polaroid">
+                                <div class="queen-advice katya-advice">
+                                    <h3>Katya Says:</h3>
+                                    <div class="advice-text" id="katya-advice"></div>
+                                </div>
+                                <div class="photo-caption">Photo 2 of 2</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div id="error-message"></div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
